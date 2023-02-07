@@ -28,7 +28,11 @@ public class SeparateClassRequest {
     }
 
     public String getTheParameter(String p) {
-        return request.getParameter(p);
+        // remediate command injection ; 
+        String userCommand = request.getParameter(p);
+	    userCommand = userCommand.replaceAll("[^A-Za-z0-9]", "");
+        return userCommand;
+        //return request.getParameter(p);
     }
 
     public String getTheCookie(String c) {
